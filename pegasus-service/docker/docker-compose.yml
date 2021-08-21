@@ -17,3 +17,10 @@ services:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/logs:/var/log/mysql
     tty: true
+  redis:
+    container_name: redis
+    image: "redis:latest"
+    ports:
+      - "16379:6379"
+    volumes:
+      - "./redis/data:/data"
