@@ -3,9 +3,9 @@ package com.xloud.pegasus.service.cache;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
-import com.xloud.pegasus.service.common.utils.JsonUtils;
-import com.xloud.pegasus.service.domain.repository.UserRepository;
-import com.xloud.pegasus.service.domain.repository.model.User;
+import com.xloud.pegasus.common.domain.repository.UserRepository;
+import com.xloud.pegasus.common.domain.repository.model.User;
+import com.xloud.pegasus.common.utils.JsonUtils;
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xloud.pegasus.common.domain.repository.UserRepository">
+    <select id="findAll" resultType="com.xloud.pegasus.common.domain.repository.model.User">
+        SELECT
+            ID,
+            MAIL_ADDRESS,
+            USER_NAME,
+            PASSWORD,
+            LAST_LOGIN_TIME,
+            REGIST_TIME,
+            UPDATE_TIME,
+            DELETED
+        FROM
+            t_users
+        WHERE
+            DELETED = 0
+        ORDER BY
+            ID
+    </select>
+    <select id="findById" resultType="com.xloud.pegasus.common.domain.repository.model.User">
+        SELECT
+            ID,
+            MAIL_ADDRESS,
+            USER_NAME,
+            PASSWORD,
+            LAST_LOGIN_TIME,
+            REGIST_TIME,
+            UPDATE_TIME,
+            DELETED
+        FROM
+            t_users
+        WHERE
+            ID = #{id}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_users
+        (
+            MAIL_ADDRESS,
+            USER_NAME,
+            PASSWORD,
+            LAST_LOGIN_TIME,
+            REGIST_TIME,
+            UPDATE_TIME,
+            DELETED
+        )
+        VALUES
+        (
+            #{user.mailAddress},
+            #{user.userName},
+            SHA2(#{user.password}, 256),
+            NULL,
+            #{user.registTime},
+            #{user.updateTime},
+            0
+        )
+    </insert>
+    <update id="update">
+        UPDATE 
+            t_users
+        SET
+            UPDATE_TIME = #{user.updateTime} 
+        <if test="user.mailAddress != null">
+            ,MAIL_ADDRESS = #{user.mailAddress} 
+        </if>
+        <if test="user.userName != null">
+            ,USER_NAME = #{user.userName} 
+        </if>
+        <if test="user.password != null">
+            ,PASSWORD = SHA2(#{user.password}, 256) 
+        </if>
+        <if test="user.deleted != null">
+            ,DELETED = #{user.deleted} 
+        </if>
+        WHERE
+            ID = #{user.id} 
+    </update>
+    <delete id="delete">
+        DELETE FROM 
+            t_users
+        WHERE
+            ID = #{id} 
+    </delete>
+</mapper>

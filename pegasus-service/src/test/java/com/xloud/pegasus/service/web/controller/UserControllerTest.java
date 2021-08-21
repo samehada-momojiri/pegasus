@@ -12,8 +12,8 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import com.xloud.pegasus.common.web.response.UserGetResponse;
 import com.xloud.pegasus.service.test.TestApplicationConfigLoader;
-import com.xloud.pegasus.service.web.dto.response.UserGetResponse;
 
 // https://terasolunaorg.github.io/guideline/5.4.1.RELEASE/ja/UnitTest/ImplementsOfUnitTest/UsageOfLibraryForTest.html
 @ExtendWith({ SpringExtension.class, TestApplicationConfigLoader.class })

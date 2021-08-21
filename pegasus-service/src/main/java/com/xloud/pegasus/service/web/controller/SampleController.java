@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xloud.pegasus.service.web.dto.request.SampleRequest;
-import com.xloud.pegasus.service.web.dto.response.SampleResponse;
+import com.xloud.pegasus.common.web.request.SampleRequest;
+import com.xloud.pegasus.common.web.response.SampleResponse;
 
 import lombok.RequiredArgsConstructor;
 

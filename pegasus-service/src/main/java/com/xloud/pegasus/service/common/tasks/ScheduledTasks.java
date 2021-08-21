@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.xloud.pegasus.service.common.utils.DateUtils;
-import com.xloud.pegasus.service.domain.repository.model.User;
+import com.xloud.pegasus.common.domain.repository.model.User;
+import com.xloud.pegasus.common.utils.DateUtils;
 import com.xloud.pegasus.service.domainbl.UserCacheBL;
 
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class ScheduledTasks {
 
 	private final UserCacheBL userCacheBL;
 
-	// @Scheduled(initialDelay = 10000, fixedRate = 1000)
+	@Scheduled(initialDelay = 60000, fixedRate = 60 * 60 * 1000)
 	public void doSomething() {
 		User user = userCacheBL.findById(5L);
 		LOGGER.info("### User : {}", user);

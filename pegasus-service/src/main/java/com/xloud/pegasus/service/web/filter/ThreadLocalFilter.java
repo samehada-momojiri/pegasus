@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 
 import org.springframework.stereotype.Component;
 
-import com.xloud.pegasus.service.common.utils.DateUtils;
+import com.xloud.pegasus.common.utils.DateUtils;
 
 @Component
 public class ThreadLocalFilter implements Filter {

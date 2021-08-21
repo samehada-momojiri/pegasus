@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 @EnableCaching
-@MapperScan("com.xloud.pegasus.service.domain.repository")
+@MapperScan("com.xloud.pegasus.common.domain.repository")
 public class PegasusServiceApplication {
 
 	public static void main(String[] args) {

@@ -3,14 +3,14 @@ package com.xloud.pegasus.service.web.helper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.xloud.pegasus.service.common.utils.ConvertUtils;
+import com.xloud.pegasus.common.utils.ConvertUtils;
+import com.xloud.pegasus.common.web.request.UserCreateRequest;
+import com.xloud.pegasus.common.web.request.UserUpdateRequest;
+import com.xloud.pegasus.common.web.response.UserCreateResponse;
+import com.xloud.pegasus.common.web.response.UserGetListResponse;
+import com.xloud.pegasus.common.web.response.UserGetResponse;
+import com.xloud.pegasus.common.web.response.UserGetListResponse.User;
 import com.xloud.pegasus.service.domain.service.dto.UserDto;
-import com.xloud.pegasus.service.web.dto.request.UserCreateRequest;
-import com.xloud.pegasus.service.web.dto.request.UserUpdateRequest;
-import com.xloud.pegasus.service.web.dto.response.UserCreateResponse;
-import com.xloud.pegasus.service.web.dto.response.UserGetListResponse;
-import com.xloud.pegasus.service.web.dto.response.UserGetListResponse.User;
-import com.xloud.pegasus.service.web.dto.response.UserGetResponse;
 
 public class UsersHelper {
 	public static UserGetListResponse convertToUsersGetListResponse(List<UserDto> list) {
