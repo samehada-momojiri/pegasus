@@ -1,0 +1,19 @@
+server:
+  servlet:
+    context-path: /pegasus-service
+  port:
+    8020
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:33060/sample
+    username: mysql-app
+    password: mysql-app
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+application:
+  business:
+    users:
+      search-limit-count: 500
+      page-size: 10
