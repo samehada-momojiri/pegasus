@@ -1,4 +1,4 @@
-package com.xloud.pegasus.service.common.tasks;
+package com.xloud.pegasus.service.tasks;
 
 import java.util.Date;
 
