@@ -9,6 +9,14 @@ spring:
     url: jdbc:mysql://localhost:33060/sample
     username: mysql-app
     password: mysql-app
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 16379
+    database: 0
+    password: 
+    timeout: 3000
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
