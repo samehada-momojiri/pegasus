@@ -25,3 +25,9 @@ application:
     users:
       search-limit-count: 500
       page-size: 10
+tasks:
+  sleep-tasks:
+    initial-delay: 1000
+    fixed-rate: 1000
+    sleep-millisecond: 1000
+    max-sleep-millisecond: 10000

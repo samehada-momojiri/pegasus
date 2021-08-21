@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.xloud.pegasus.service.common.utils.DateUtils;
@@ -20,7 +19,7 @@ public class ScheduledTasks {
 
 	private final UserCacheBL userCacheBL;
 
-	@Scheduled(initialDelay = 10000, fixedRate = 1000)
+	// @Scheduled(initialDelay = 10000, fixedRate = 1000)
 	public void doSomething() {
 		User user = userCacheBL.findById(5L);
 		LOGGER.info("### User : {}", user);
