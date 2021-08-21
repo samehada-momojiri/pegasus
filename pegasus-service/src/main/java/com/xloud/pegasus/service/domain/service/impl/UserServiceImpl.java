@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xloud.pegasus.service.common.utils.DateUtils;
-import com.xloud.pegasus.service.domain.repository.UserRepository;
-import com.xloud.pegasus.service.domain.repository.model.User;
+import com.xloud.pegasus.common.domain.repository.UserRepository;
+import com.xloud.pegasus.common.domain.repository.model.User;
+import com.xloud.pegasus.common.utils.DateUtils;
 import com.xloud.pegasus.service.domain.service.UserService;
 import com.xloud.pegasus.service.domain.service.dto.UserDto;
 

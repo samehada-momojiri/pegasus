@@ -2,9 +2,9 @@ package com.xloud.pegasus.service.domainbl.impl;
 
 import org.springframework.stereotype.Component;
 
+import com.xloud.pegasus.common.domain.repository.model.User;
+import com.xloud.pegasus.common.utils.JsonUtils;
 import com.xloud.pegasus.service.cache.UserCacheObject;
-import com.xloud.pegasus.service.common.utils.JsonUtils;
-import com.xloud.pegasus.service.domain.repository.model.User;
 import com.xloud.pegasus.service.domainbl.UserCacheBL;
 
 import lombok.RequiredArgsConstructor;

@@ -9,10 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.xloud.pegasus.common.web.response.UserGetResponse;
 import com.xloud.pegasus.service.domain.service.UserService;
 import com.xloud.pegasus.service.domain.service.dto.UserDto;
 import com.xloud.pegasus.service.test.TestApplicationConfigLoader;
-import com.xloud.pegasus.service.web.dto.response.UserGetResponse;
 
 @SpringBootTest
 @ExtendWith({ SpringExtension.class, TestApplicationConfigLoader.class })

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.xloud.pegasus.service.web.dto.response.UserGetResponse;
+import com.xloud.pegasus.common.web.response.UserGetResponse;
 
 @FeignClient(name = "usersTest", url = "http://localhost:8020/")
 public interface UserControllerTestFeignClient {
