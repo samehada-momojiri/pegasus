@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  db:
+    container_name: oursql5.7
+    build: ./mysql/
+    hostname: mysql
+    environment:
+      MYSQL_DATABASE: sample
+      MYSQL_USER: mysql-app
+      MYSQL_PASSWORD: mysql-app
+      MYSQL_ROOT_PASSWORD: admin
+      BIND-ADDRESS: 0.0.0.0
+    ports:
+      - "33060:3306"
+    volumes:
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/logs:/var/log/mysql
+    tty: true
