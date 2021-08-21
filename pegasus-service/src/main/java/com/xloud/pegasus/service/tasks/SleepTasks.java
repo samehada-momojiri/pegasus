@@ -36,6 +36,7 @@ public class SleepTasks {
 
 		sleep();
 
+		// データ取得
 		String data = redisTemplate.opsForValue().get("Cache::SleepTasks::data");
 
 		if (StringUtils.isEmpty(data)) {
@@ -44,24 +45,28 @@ public class SleepTasks {
 			return;
 		}
 		LOGGER.info("### Data exists");
+		skipCount = 0;
+
+		// 主処理（ダミー）
 		try {
 			Thread.sleep(1500L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		skipCount = 0;
+
 	}
 
 	private void sleep() {
-		if (skipCount > 0) {
-			long sleepMillisecond = skipCount * SLEEP_MILLISECOND;
-			sleepMillisecond = (sleepMillisecond > MAX_SLEEP_MILLISECOND) ? MAX_SLEEP_MILLISECOND : sleepMillisecond;
-			LOGGER.info("### Sleep: {}", sleepMillisecond);
-			try {
-				Thread.sleep(sleepMillisecond);
-			} catch (InterruptedException e) {
-				// NOP
-			}
+		if (skipCount == 0) {
+			return;
+		}
+		long sleepMillisecond = skipCount * SLEEP_MILLISECOND;
+		sleepMillisecond = (sleepMillisecond > MAX_SLEEP_MILLISECOND) ? MAX_SLEEP_MILLISECOND : sleepMillisecond;
+		LOGGER.info("### Sleep: {}", sleepMillisecond);
+		try {
+			Thread.sleep(sleepMillisecond);
+		} catch (InterruptedException e) {
+			// NOP
 		}
 	}
 }
