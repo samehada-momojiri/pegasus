@@ -1,4 +1,4 @@
-package com.xloud.pegasus.service.common.utils;
+package com.xloud.pegasus.service.common.tasks;
 
 import java.util.Date;
 
@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import com.xloud.pegasus.service.common.utils.DateUtils;
 
 @Component
 public class ScheduledTasks {
