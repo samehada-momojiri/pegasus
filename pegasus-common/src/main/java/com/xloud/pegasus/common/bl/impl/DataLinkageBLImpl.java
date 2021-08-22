@@ -60,7 +60,7 @@ public class DataLinkageBLImpl implements DataLinkageBL {
 
 		for (ValueObjectDto valueObjectDto : valueObjectDtoList) {
 			try {
-				Object obj = JsonUtils.convertListFromJson(valueObjectDto.getData(),
+				Object obj = JsonUtils.convertFromJson(valueObjectDto.getData(),
 						Class.forName(valueObjectDto.getType()));
 				resultList.add((T) obj);
 			} catch (ClassNotFoundException e) {
