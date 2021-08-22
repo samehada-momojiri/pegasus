@@ -1,0 +1,5 @@
+application:
+  business:
+    users:
+      search-limit-count: 100
+      page-size: 10

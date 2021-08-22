@@ -19,4 +19,7 @@ public class BusinessException extends Exception {
 	private List<ErrorMessageDto> errors = Lists.newArrayList();
 	private Throwable cause;
 
+	public BusinessException(String errorCode, String errorMessage) {
+		this.errors = Lists.newArrayList(new ErrorMessageDto(errorCode, errorMessage));
+	}
 }
