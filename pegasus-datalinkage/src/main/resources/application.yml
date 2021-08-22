@@ -1,8 +1,7 @@
 server:
   servlet:
-    context-path: /pegasus-service
-  port:
-    8020
+    context-path: /pegasus-datalinkage
+  port: 8050
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,21 +16,7 @@ spring:
     database: 0
     password: 
     timeout: 3000
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-application:
-  business:
-    users:
-      search-limit-count: 500
-      page-size: 10
 datalinkage:
   url: http://localhost:8050/pegasus-datalinkage/messages
   publish: /publish
   subscription: /subscription
-tasks:
-  sleep-tasks:
-    initial-delay: 1000
-    fixed-rate: 1000
-    sleep-millisecond: 1000
-    max-sleep-millisecond: 10000
