@@ -13,14 +13,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 @EnableCaching
-@EnableFeignClients
-//@ComponentScan({ "com.xloud.pegasus.common", "com.xloud.pegasus.service" })
-//@ComponentScans({ @ComponentScan("com.xloud.pegasus.common"), @ComponentScan("com.xloud.pegasus.service") })
-@ComponentScan("com.xloud.pegasus")
+@EnableFeignClients({ "com.xloud.pegasus.common", "com.xloud.pegasus.service" })
+@ComponentScan({ "com.xloud.pegasus.common", "com.xloud.pegasus.service" })
 @MapperScan("com.xloud.pegasus.common.domain.repository")
 public class PegasusServiceApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Properties properties = System.getProperties();
 		properties.put("spring.config.location", "classpath:application.yml,classpath:/application-override.yml");
 		SpringApplication.run(PegasusServiceApplication.class, args);

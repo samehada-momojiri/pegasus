@@ -9,10 +9,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableCaching
-@EnableFeignClients
+@EnableFeignClients({ "com.xloud.pegasus.common", "com.xloud.pegasus.datalinkage" })
 @SpringBootApplication
-//@ComponentScans({ @ComponentScan("com.xloud.pegasus.common"), @ComponentScan("com.xloud.pegasus.datalinkage") })
-@ComponentScan("com.xloud.pegasus")
+@ComponentScan({ "com.xloud.pegasus.common", "com.xloud.pegasus.datalinkage" })
 public class PegasusDatalinkageApplication {
 
 	public static void main(String[] args) {

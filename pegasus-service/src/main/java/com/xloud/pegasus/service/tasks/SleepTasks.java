@@ -11,8 +11,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.xloud.pegasus.common.bl.DataLinkageBL;
-import com.xloud.pegasus.common.domain.repository.model.User;
 import com.xloud.pegasus.common.exception.BusinessException;
+import com.xloud.pegasus.service.domain.service.dto.UserDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,7 +47,7 @@ public class SleepTasks {
 
 			// データ取得
 			// String data = redisTemplate.opsForValue().get("Cache::SleepTasks::data");
-			List<User> userList = dataLinkageBL.subscription("AA", "UserInfo", null, User.class);
+			List<UserDto> userList = dataLinkageBL.subscription("AA", "UserInfo", null, UserDto.class);
 
 			if (userList.isEmpty()) {
 				LOGGER.info("### Data not exists");
@@ -59,7 +59,7 @@ public class SleepTasks {
 
 			// 主処理（ダミー）
 			try {
-				for (User user : userList) {
+				for (UserDto user : userList) {
 					LOGGER.info("### User: {}", user);
 				}
 				Thread.sleep(1500L);
