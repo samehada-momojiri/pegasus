@@ -35,3 +35,4 @@ tasks:
     fixed-rate: 1000
     sleep-millisecond: 1000
     max-sleep-millisecond: 10000
+    task-on: false
