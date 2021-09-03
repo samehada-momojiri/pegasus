@@ -3,6 +3,10 @@ server:
     context-path: /pegasus-datalinkage
   port: 8050
 spring:
+  application:
+    name: pegasus-datalinkage
+  profiles:
+    active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:33060/sample
@@ -20,3 +24,7 @@ datalinkage:
   url: http://localhost:8050/pegasus-datalinkage/messages
   publish: /publish
   subscription: /subscription
+application:
+  version: v1.0
+log:
+  base-directory: C:/work/logs
