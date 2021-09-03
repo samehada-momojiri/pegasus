@@ -4,6 +4,10 @@ server:
   port:
     8020
 spring:
+  application:
+    name: pegasus-service
+  profiles:
+    active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:33060/sample
@@ -21,6 +25,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 application:
+  version: v1.0
   business:
     users:
       search-limit-count: 500
@@ -36,3 +41,5 @@ tasks:
     sleep-millisecond: 1000
     max-sleep-millisecond: 10000
     task-on: false
+log:
+  base-directory: C:/work/logs
