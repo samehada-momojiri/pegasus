@@ -1,0 +1,24 @@
+server:
+  servlet:
+    context-path: /pegasus-front
+  port:
+    8010
+spring:
+  application:
+    name: pegasus-front
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:33060/sample
+    username: mysql-app
+    password: mysql-app
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+application:
+  version: v1.0
+log:
+  base-directory: C:/work/logs

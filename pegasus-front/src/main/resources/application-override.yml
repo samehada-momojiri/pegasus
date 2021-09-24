@@ -1,0 +1,14 @@
+server:
+  servlet:
+    context-path: /pegasus-front
+  port:
+    8010
+spring:
+  application:
+    name: pegasus-front
+  profiles:
+    active: dev
+application:
+  version: v1.0
+log:
+  base-directory: C:/work/logs
