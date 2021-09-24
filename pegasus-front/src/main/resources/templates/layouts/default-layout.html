@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/common.css}" href="/css/common.css">
+	<title>Insert title here</title>
+</head>
+
+<body>
+
+	<header>
+		<div class="navbar navbar-dark bg-dark shadow-sm">
+			<div class="container d-flex justify-content-between">
+				<a href="#" class="navbar-brand d-flex align-items-center">
+					<strong>Pegasus - Front</strong>
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+					aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+		</div>
+	</header>
+
+	<main role="main">
+		<section class="jumbotron text-center">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-8">
+						<div layout:fragment="content">
+						</div>
+						<div class="col-sm-2"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="text-muted">
+		<div class="container">
+			<p class="float-right">
+				<a href="#">Back to top</a>
+			</p>
+		</div>
+	</footer>
+
+	<script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script th:src="@{/js/common.js}"></script>
+</body>
+
+</html>
