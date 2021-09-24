@@ -21,6 +21,11 @@ spring:
     database: 0
     password: 
     timeout: 3000
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
