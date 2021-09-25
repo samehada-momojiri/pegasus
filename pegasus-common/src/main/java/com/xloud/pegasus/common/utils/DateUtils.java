@@ -32,8 +32,10 @@ public class DateUtils {
 	}
 
 	public static Date parse(String strDate) {
+
 		try {
-			return DateFormatUtils.ISO_8601_EXTENDED_DATETIME_TIME_ZONE_FORMAT.parse(strDate);
+			return org.apache.commons.lang3.time.DateUtils.parseDateStrictly(strDate, "yyyyMMdd", "yyyy-MM-dd",
+					"yyyy/MM/dd", "yyyyMMddHHmmss", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ssZZ");
 		} catch (Exception e) {
 			return null;
 		}
