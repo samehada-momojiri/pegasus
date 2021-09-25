@@ -89,9 +89,13 @@ public class SampleController {
 		model.addAttribute("authorityMap", authorityMap);
 
 		Map<String, String> availableFunctionMap = Maps.newLinkedHashMap();
-		availableFunctionMap.put("A1", "ユーザ管理");
-		availableFunctionMap.put("B1", "受注管理");
-		availableFunctionMap.put("C1", "発注管理");
+		availableFunctionMap.put("Z1", "ユーザ管理");
+		availableFunctionMap.put("Z2", "権限管理");
+		availableFunctionMap.put("A1", "顧客管理");
+		availableFunctionMap.put("B1", "商品管理");
+		availableFunctionMap.put("C1", "受注管理");
+		availableFunctionMap.put("D1", "発注管理");
+		availableFunctionMap.put("E1", "請求管理");
 		model.addAttribute("availableFunctionMap", availableFunctionMap);
 	}
 

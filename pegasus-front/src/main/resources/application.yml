@@ -8,6 +8,9 @@ spring:
     name: pegasus-front
   profiles:
     active: dev
+  messages:
+    basename: "application-messages,ValidationMessages"
+    encoding: "UTF-8"
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:33060/sample
@@ -20,5 +23,6 @@ spring:
       enabled: true
 application:
   version: v1.0
+
 log:
   base-directory: C:/work/logs
