@@ -15,8 +15,8 @@
 					<label class="float-left m-2" for="name">名前</label>
 				</div>
 				<div class="col-sm-9">
-					<input id="name" type="text" name="name" class="form-control" placeholder="Jack"
-						th:value="*{name}" th:disabled="*{readOnly == '1'}" />
+					<input id="name" type="text" name="name" class="form-control" placeholder="Jack" th:value="*{name}"
+						th:disabled="*{readOnly == '1'}" />
 					<span class="float-left text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 				</div>
 				
@@ -77,9 +77,13 @@
 				</div>
 				<div class="col-sm-9">
 					<span class="form-inline float-left m-2" th:each="map : ${availableFunctionMap}">
-						<input th:id="availableFunction+${map.key}" type="checkbox" name="availableFunction"
-							th:value="${map.key}" th:checked="${#arrays.contains(userForm.availableFunction, '' + map.key)}" th:disabled="*{readOnly == '1'}" />
-						<label th:for="availableFunction+${map.key}">[[${map.value}]]</label>
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-primary" th:for="availableFunction+${map.key}">
+								<input th:id="availableFunction+${map.key}" type="checkbox" name="availableFunction" autocomplete="off"
+									th:value="${map.key}" th:checked="${#arrays.contains(userForm.availableFunction, '' + map.key)}" th:disabled="*{readOnly == '1'}" />
+								[[${map.value}]]
+							</label>
+						</div>
 					</span>
 					<span class="float-left text-danger" th:if="${#fields.hasErrors('availableFunction')}" th:errors="*{availableFunction}"></span>
 				</div>

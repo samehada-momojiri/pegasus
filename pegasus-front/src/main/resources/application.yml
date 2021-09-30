@@ -23,6 +23,19 @@ spring:
       enabled: true
 application:
   version: v1.0
+security:
+  admin:
+    username: admin
+    password: pass
+#management:
+#  endpoints:
+#    web:
+#      base-path: /system
+#      exposure:
+#        include: "*"
+#        exclude: shutdown
+#    health:
+#      show-details: always
 
 log:
   base-directory: C:/work/logs
