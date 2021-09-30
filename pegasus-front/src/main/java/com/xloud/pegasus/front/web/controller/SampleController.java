@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.stereotype.Controller;
@@ -118,6 +117,10 @@ public class SampleController {
 		private String password;
 		@NotEmpty
 		private String confirmPassword;
+		@NotEmpty
+		private String birthDay;
+		@NotEmpty
+		private String hopeDay;
 		@NotEmpty
 		private String sex;
 		@NotEmpty

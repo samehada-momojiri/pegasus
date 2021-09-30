@@ -36,7 +36,7 @@ public class WebBasicAuthSecurityConfiguration extends WebSecurityConfigurerAdap
 	protected void configure(HttpSecurity http) throws Exception {
 		// (3) 主にURLごとに異なるセキュリティ設定を行う
 		// (3) Basic認証の対象となるパス
-		http.antMatcher("/**");
+		http.antMatcher("/nothing/**");
 
 		// (4) Basic認証を指定
 		http.httpBasic();
