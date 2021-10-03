@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -23,6 +24,7 @@ import com.xloud.pegasus.constants.CommonConstants;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Controller
 @RequestMapping(CommonConstants.URL_BASE_MPA + "/sample")
@@ -54,14 +56,42 @@ public class SampleController {
 		return "sample/basic";
 	}
 
+	@GetMapping(value = "/player/init")
+	public String getPlayerInit(PlayerForm playerForm, Model model) {
+		List<Player> playerList = Lists.newArrayList();
+		playerList.add(new Player(100, "M.Jordan", "Chicago", DateUtils.parse("1963-02-17")));
+		playerList.add(new Player(200, "L.James", "Lakers", DateUtils.parse("1984-12-30")));
+		playerList.add(new Player(300, "S.Curry", "Warriors", DateUtils.parse("1988-03-14")));
+		playerList.add(new Player(400, "K.Durant", "Nets", DateUtils.parse("1988-09-29")));
+		playerList.add(new Player(500, "J.Harden", "Nets", DateUtils.parse("1989-08-26")));
+		model.addAttribute("playerList", playerList);
+		return "sample/playerList.html";
+	}
+
+	@PostMapping(value = "/player/add")
+	public String getPlayerAdd(@Validated PlayerForm playerForm, BindingResult bindingResult, Model model) {
+		List<Player> playerList = Lists.newArrayList();
+		playerList.add(playerForm.getPlayer());
+		model.addAttribute("playerList", playerList);
+
+		System.out.println("***********************************");
+		System.out.println(playerList);
+		System.out.println("***********************************");
+		return "sample/playerList.html";
+	}
+
 	@GetMapping(value = "/input")
-	public String initInput(Model model) {
+	public String initInput(@RequestParam(name = "mode", defaultValue = "1") String mode, Model model) {
 		initModel(model);
 
 		UserForm userForm = new UserForm();
+		userForm.setMode(mode);
 		userForm.setAuthority("1");
 		model.addAttribute("userForm", userForm);
-		return "sample/input";
+		if ("1".equals(mode)) {
+			return "sample/input";
+		}
+		return "sample/embedded-input";
 	}
 
 	@PostMapping(value = "/confirm")
@@ -70,7 +100,10 @@ public class SampleController {
 		System.out.println(JsonUtils.convertToJson(userForm));
 		System.out.println("*******************************************************************");
 		initModel(model);
-		return "sample/input";
+		if ("1".equals(userForm.getMode())) {
+			return "sample/input";
+		}
+		return "sample/embedded-input";
 	}
 
 	private void initModel(Model model) {
@@ -99,6 +132,7 @@ public class SampleController {
 	}
 
 	@Data
+	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class Player {
 		private Integer no;
@@ -109,6 +143,8 @@ public class SampleController {
 
 	@Data
 	public static class UserForm {
+		@NotEmpty
+		private String mode;
 		@NotEmpty
 		private String name;
 		@NotEmpty
@@ -128,6 +164,12 @@ public class SampleController {
 		private String readOnly;
 		@NotEmpty
 		private List<String> availableFunction = Lists.newArrayList();
+	}
+
+	@Data
+	public static class PlayerForm {
+		// nullでないとエラー
+		private Player player = new Player();
 	}
 
 }

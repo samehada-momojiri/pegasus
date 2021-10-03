@@ -1,0 +1,83 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/default-layout">
+
+<head>
+	<meta charset="UTF-8">
+	<title th:text="'Player List'"></title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<h1>Input Form (Ajax)</h1>
+		<div class="row" id="embeddedContainer">
+		</div>
+		<div class="row">
+			<form id="playerForm" method="post" th:object="${playerForm}" th:action="@{/dev/v1.0/mpa/sample/player/add}">
+				<th:block th:object="${playerForm.player}">
+					<div class="form-group row">
+						<div class="col-sm-3">
+							<label class="float-left m-2" for="name">No</label>
+						</div>
+						<div class="col-sm-9">
+							<input id="no" type="text" name="player.no" class="form-control" placeholder="23" th:value="*{no}" />
+							<span class="float-left text-danger" th:if="${#fields.hasErrors('no')}" th:errors="*{no}"></span>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-3">
+							<label class="float-left m-2" for="name">名前</label>
+						</div>
+						<div class="col-sm-9">
+							<input id="name" type="text" name="player.name" class="form-control" placeholder="M.Jordan" th:value="*{name}" />
+							<span class="float-left text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-3">
+							<label class="float-left m-2" for="team">チーム</label>
+						</div>
+						<div class="col-sm-9">
+							<input id="team" type="text" name="player.team" class="form-control" placeholder="Chicago" th:value="*{team}" />
+							<span class="float-left text-danger" th:if="${#fields.hasErrors('team')}" th:errors="*{team}"></span>
+						</div>
+					</div>
+				</th:block>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>名前</th>
+						<th>チーム</th>
+						<th>生年月日</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="player, status : ${playerList}">
+						<th th:text="${status.count}"></th>
+						<td th:text="${player.name}"></td>
+						<td th:text="${player.team}"></td>
+						<td th:text="${#dates.format(player.birthday, 'yyyy-MM-dd')}"></td>
+					</tr>
+				</tbody>
+			</table>
+	
+			<a th:href="@{/}">
+				<button type="button" class="btn btn-primary">Go to Top</button>
+			</a>
+		</div>
+		<a id="targetUrl" class="d-none" th:href="@{/dev/v1.0/mpa/sample/input?mode=2}"></a>
+		<script type="text/javascript">
+			$(function () {
+				$("#overlay").fadeIn(300);
+				var targetUrl = $("#targetUrl").attr("href");
+				$("#embeddedContainer").load(targetUrl, null, function () {
+					$("#overlay").fadeOut(300);
+				});
+			});	
+		</script>
+	</div>
+</body>
+
+</html>
