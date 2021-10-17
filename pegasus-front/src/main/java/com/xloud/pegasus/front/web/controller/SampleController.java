@@ -47,6 +47,11 @@ public class SampleController {
 		int nextInt = RandomUtils.nextInt(1, 4);
 		model.addAttribute("priority", nextInt);
 
+		model.addAttribute("prefix", "Prefix");
+		model.addAttribute("body", "Body");
+		model.addAttribute("str", "Hello,World!");
+		model.addAttribute("longstr", "XXXXXXXX10XXXXXXXX20XXXXXXXX30");
+
 		List<Player> playerList = Lists.newArrayList();
 		playerList.add(new Player(100, "M.Jordan", "Chicago", DateUtils.parse("1963-02-17")));
 		playerList.add(new Player(200, "L.James", "Lakers", DateUtils.parse("1984-12-30")));

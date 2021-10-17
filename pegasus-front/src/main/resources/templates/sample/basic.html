@@ -35,6 +35,16 @@
 			<p th:case=* th:text="UNKNOWN"></p>
 		</th:block>
 
+		<p>Data</p>
+		<p th:text="${prefix} + '-' + ${body}"></p>
+
+		<p>Str</p>
+		<p th:text="${str}"></p>
+		<p th:text="${#sample.convert(str)}"></p>
+		<p th:text="${#sample.format(str)}"></p>
+		<p th:text="${#strings.abbreviate(longstr, 20)}"></p>
+		<p th:text="${#strings.replace(#strings.abbreviate(longstr, 22), '...', '…')}"></p>
+
 		<table class="table table-striped">
 			<thead>
 				<tr>
