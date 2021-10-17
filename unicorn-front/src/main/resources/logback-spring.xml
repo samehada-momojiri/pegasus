@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+	<!-- Properties -->
+	<property name="ENCODING" value="UTF-8" />
+	<property name="LOG_PATTERN"
+		value="%d{yyyy/MM/dd HH:mm:ss.SSS Z} | %-5level | %-25.-25thread | %-40.-40logger{39} | %msg%n" />
+	<springProperty name="BASE_DIRECTORY" source="log.base-directory" />
+	<springProperty name="APP_NAME" source="spring.application.name" />
+	<springProperty name="APP_PROFILES" source="spring.profiles.active" />
+	<springProperty name="APP_VERSION" source="application.version" />
+	<property name="LOG_FILE_PATH" value="${BASE_DIRECTORY}/${APP_PROFILES}" />
+	<property name="MAX_HISTORY" value="30" />
+
+	<!-- Log Level Settings -->
+	<if condition='"${APP_PROFILES}".contains("dev")'>
+		<then>
+			<property name="LOG_LEVE" value="DEBUG" />
+		</then>
+	</if>
+	<if condition='"${APP_PROFILES}".contains("stg") || "${APP_PROFILES}".contains("prd")'>
+		<then>
+			<property name="LOG_LEVE" value="INFO" />
+		</then>
+	</if>
+
+	<!-- STDOUT -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>${ENCODING}</charset>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- FILE_APP -->
+	<appender name="FILE_APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FILE_PATH}/${APP_NAME}-${APP_VERSION}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE_PATH}/${APP_NAME}-${APP_VERSION}-%d{yyyyMMdd}.log</fileNamePattern>
+			<maxHistory>${MAX_HISTORY}</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<charset>${ENCODING}</charset>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.xloud.unicorn.front" level="${LOG_LEVEL}" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE_APP" />
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE_APP" />
+	</root>
+
+</configuration>

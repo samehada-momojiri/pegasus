@@ -1,0 +1,14 @@
+server:
+  servlet:
+    context-path: /unicorn-front
+  port:
+    8050
+spring:
+  application:
+    name: unicorn-front
+  profiles:
+    active: dev
+application:
+  version: v1.0
+log:
+  base-directory: C:/work/logs

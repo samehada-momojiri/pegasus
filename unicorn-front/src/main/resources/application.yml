@@ -1,0 +1,32 @@
+server:
+  servlet:
+    context-path: /unicorn-front
+  port:
+    8050
+spring:
+  application:
+    name: unicorn-front
+  profiles:
+    active: dev
+  messages:
+    basename: "application-messages,ValidationMessages"
+    encoding: "UTF-8"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:33060/sample
+    username: mysql-app
+    password: mysql-app
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+application:
+  version: v1.0
+security:
+  admin:
+    username: admin
+    password: pass
+
+log:
+  base-directory: C:/work/logs
