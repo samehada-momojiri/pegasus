@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.validation.constraints.NotEmpty;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +29,8 @@ import lombok.Data;
 @Controller
 @RequestMapping(CommonConstants.URL_BASE_MPA + "/sample")
 public class SampleController {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(SampleController.class);
 
 	@GetMapping(value = "/time")
 	public String getTime(Model model) {
@@ -66,11 +70,24 @@ public class SampleController {
 
 	@PostMapping(value = "/confirm")
 	public String confirmInput(@Validated UserForm userForm, BindingResult bindingResult, Model model) {
-		System.out.println("*******************************************************************");
-		System.out.println(JsonUtils.convertToJson(userForm));
-		System.out.println("*******************************************************************");
+		LOGGER.debug("*******************************************************************");
+		LOGGER.debug(JsonUtils.convertToJson(userForm));
+		LOGGER.debug("*******************************************************************");
 		initModel(model);
 		return "sample/input";
+	}
+
+	@GetMapping(value = "/multi-value/init")
+	public String initMultiValueInput(Model model) {
+		return "sample/multiInput";
+	}
+
+	@PostMapping(value = "/multi-value/confirm")
+	public String confirmMultiValueInput(MultiValueForm multiValueForm, BindingResult bindingResult, Model model) {
+		LOGGER.debug("*******************************************************************");
+		LOGGER.debug(JsonUtils.convertToJson(multiValueForm));
+		LOGGER.debug("*******************************************************************");
+		return "sample/multiInput";
 	}
 
 	private void initModel(Model model) {
@@ -128,6 +145,15 @@ public class SampleController {
 		private String readOnly;
 		@NotEmpty
 		private List<String> availableFunction = Lists.newArrayList();
+	}
+
+	@Data
+	public static class MultiValueForm {
+		private String selectedCode;
+		private List<String> checkboxList;
+		private Map<String, Map<String, String>> multiValueMap;
+		private Map<String, List<String>> code1;
+		private Map<String, Map<String, List<String>>> code1Attr;
 	}
 
 }
