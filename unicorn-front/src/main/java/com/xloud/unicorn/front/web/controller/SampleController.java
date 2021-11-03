@@ -1,6 +1,7 @@
 package com.xloud.unicorn.front.web.controller;
 
 import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,4 +25,10 @@ public class SampleController {
 		return "sample/input";
 	}
 
+	@GetMapping(value = "/ajaxFragment")
+	public String getMorePage(Model model) {
+		UUID randomUUID = UUID.randomUUID();
+		model.addAttribute("uuid", randomUUID);
+		return "components/ajaxfragment :: cardfragment";
+	}
 }
