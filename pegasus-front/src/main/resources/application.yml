@@ -11,6 +11,17 @@ spring:
   messages:
     basename: "application-messages,ValidationMessages"
     encoding: "UTF-8"
+  session:
+    store-type: redis
+    redis:
+      namespace: ${spring.application.name}:${spring.profiles.active}:${application.version}
+      flush-mode: on-save    
+  redis:
+    host: localhost
+    port: 16379
+    database: 0
+    password: 
+    timeout: 3000
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:33060/sample

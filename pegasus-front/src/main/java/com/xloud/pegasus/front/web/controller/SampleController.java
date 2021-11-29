@@ -1,5 +1,6 @@
 package com.xloud.pegasus.front.web.controller;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -22,18 +23,31 @@ import com.google.common.collect.Maps;
 import com.xloud.pegasus.common.utils.DateUtils;
 import com.xloud.pegasus.common.utils.JsonUtils;
 import com.xloud.pegasus.constants.CommonConstants;
+import com.xloud.pegasus.front.web.session.SessionInfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping(CommonConstants.URL_BASE_MPA + "/sample")
+@RequiredArgsConstructor
 public class SampleController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SampleController.class);
 
+	private final SessionInfo sessionInfo;
+
 	@GetMapping(value = "/time")
 	public String getTime(Model model) {
+		if (sessionInfo.getStartedAt() == null) {
+			// sessionInfo.setClientIp(request.getRemoteAddr());
+			sessionInfo.setStartedAt(LocalDateTime.now());
+			sessionInfo.setMessage("Session start.");
+		} else {
+			sessionInfo.setMessage("Session is continuing.");
+		}
+
 		Date threadDateTime = DateUtils.getThreadDateTime();
 		String dateTime = DateUtils.format(threadDateTime);
 
