@@ -1,136 +1,255 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/default-layout">
+<html
+  lang="ja"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/default-layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="'Input Form'"></title>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<title th:text="'Input Form'"></title>
-</head>
-
-<body>
-	<div layout:fragment="content">
-		<h1>Input Form</h1>
-		<form method="post" th:object="${userForm}" th:action="@{/dev/v1.0/mpa/sample/confirm}">
-			<div class="form-group row">
-				<div class="col-sm-3">
-					<label class="float-left m-2" for="name">名前</label>
-				</div>
-				<div class="col-sm-9">
-					<input id="name" type="text" name="name" class="form-control" placeholder="Jack" th:value="*{name}"
-						th:disabled="*{readOnly == '1'}" />
-					<span class="float-left text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-				</div>
-				
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-3">
-					<label class="float-left m-2" for="mailAddress">メールアドレス</label>
-				</div>
-				<div class="col-sm-9">
-					<input id="mailAddress" type="email" name="mailAddress" class="form-control" placeholder="jack@gmail.com" th:value="*{mailAddress}" th:disabled="*{readOnly == '1'}" />
-					<span class="float-left text-danger" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-3">
-					<label class="float-left m-2" for="password">パスワード</label>
-				</div>
-				<div class="col-sm-9">
-					<input id="password" type="password" name="password" class="form-control" th:value="*{password}" th:disabled="*{readOnly == '1'}" />
-					<span class="float-left text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-3">
-					<label class="float-left m-2" for="confirmPassword">パスワード（確認用）</label>
-				</div>
-				<div class="col-sm-9">
-					<input id="confirmPassword" type="password" name="confirmPassword" class="form-control" th:value="*{confirmPassword}" th:disabled="*{readOnly == '1'}" />
-					<span class="float-left text-danger" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-3">
-					<label class="float-left m-2" for="sex">性別</label>
-				</div>
-				<div class="col-sm-9">
-					<select name="sex" class="form-control" th:field="*{sex}" th:disabled="*{readOnly == '1'}">
-						<option th:each="map : ${sexMap}" th:value="${map.key}">[[${map.value}]]</option>
-					</select>
-					<span class="float-left text-danger" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-3">
-					<label class="float-left m-2" for="birthDay">生年月日</label>
-				</div>
-				<div class="col-sm-9 input-group">
-					<input id="birthDay" type="text" name="birthDay" class="form-control" th:value="*{birthDay}" th:disabled="*{readOnly == '1'}" />
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button" data-toggle="datepicker" data-target="#birthDay">
-							<span class="far fa-calendar-alt"></span>
-						</button>
-					</span>
-      				<span class="float-left text-danger" th:if="${#fields.hasErrors('birthDay')}" th:errors="*{birthDay}"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-3">
-					<label class="float-left m-2" for="hopeDay">希望日</label>
-				</div>
-				<div class="col-sm-9 input-group">
-					<input id="hopeDay" type="text" name="hopeDay" class="form-control" th:value="*{hopeDay}" th:disabled="*{readOnly == '1'}" />
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button" data-toggle="datepicker" data-target="#hopeDay">
-							<span class="far fa-calendar-alt"></span>
-						</button>
-					</span>
-					<span class="float-left text-danger" th:if="${#fields.hasErrors('hopeDay')}" th:errors="*{hopeDay}"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-3">
-					<label class="float-left m-2" for="authority">権限</label>
-				</div>
-				<div class="col-sm-9">
-					<span class="form-inline float-left m-2" th:each="map : ${authorityMap}">
-						<input th:id="authority+${map.key}" type="radio" name="authority" th:value="${map.key}" th:field="*{authority}" th:disabled="*{readOnly == '1'}" />
-						<label th:for="authority+${map.key}">[[${map.value}]]</label>
-					</span>
-					<span class="float-left text-danger" th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-3">
-					<label class="float-left m-2" for="availableFunction">利用可能機能</label>
-				</div>
-				<div class="col-sm-9">
-					<span class="form-inline float-left m-2" th:each="map : ${availableFunctionMap}">
-						<div class="btn-group btn-group-toggle" data-toggle="buttons">
-							<label class="btn btn-primary" th:for="availableFunction+${map.key}">
-								<input th:id="availableFunction+${map.key}" type="checkbox" name="availableFunction" autocomplete="off"
-									th:value="${map.key}" th:checked="${#arrays.contains(userForm.availableFunction, '' + map.key)}" th:disabled="*{readOnly == '1'}" />
-								[[${map.value}]]
-							</label>
-						</div>
-					</span>
-					<span class="float-left text-danger" th:if="${#fields.hasErrors('availableFunction')}" th:errors="*{availableFunction}"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-3">
-					<label class="float-left m-2" for="readOnly">読み取り専用</label>
-				</div>
-				<div class="col-sm-9">
-					<span class="form-inline float-left m-2">
-						<input th:id="readOnly" type="checkbox" name="readOnly" value="1" th:checked="*{readOnly == '1'}" />
-						<label th:for="readOnly"></label>
-					</span>
-					<span class="float-left text-danger" th:if="${#fields.hasErrors('readOnly')}" th:errors="*{readOnly}"></span>
-				</div>
-			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
-	</div>
-</body>
-
+  <body>
+    <div layout:fragment="content">
+      <h1>Input Form</h1>
+      <form method="post" th:object="${userForm}" th:action="@{/dev/v1.0/mpa/sample/confirm}">
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="float-left m-2" for="name">名前</label>
+          </div>
+          <div class="col-sm-9">
+            <input
+              id="name"
+              type="text"
+              name="name"
+              class="form-control"
+              placeholder="Jack"
+              th:value="*{name}"
+              th:disabled="*{readOnly == '1'}"
+            />
+            <span
+              class="float-left text-danger"
+              th:if="${#fields.hasErrors('name')}"
+              th:errors="*{name}"
+            ></span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="float-left m-2" for="mailAddress">メールアドレス</label>
+          </div>
+          <div class="col-sm-9">
+            <input
+              id="mailAddress"
+              type="email"
+              name="mailAddress"
+              class="form-control"
+              placeholder="jack@gmail.com"
+              th:value="*{mailAddress}"
+              th:disabled="*{readOnly == '1'}"
+            />
+            <span
+              class="float-left text-danger"
+              th:if="${#fields.hasErrors('mailAddress')}"
+              th:errors="*{mailAddress}"
+            ></span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="float-left m-2" for="password">パスワード</label>
+          </div>
+          <div class="col-sm-9">
+            <input
+              id="password"
+              type="password"
+              name="password"
+              class="form-control"
+              th:value="*{password}"
+              th:disabled="*{readOnly == '1'}"
+            />
+            <span
+              class="float-left text-danger"
+              th:if="${#fields.hasErrors('password')}"
+              th:errors="*{password}"
+            ></span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="float-left m-2" for="confirmPassword">パスワード（確認用）</label>
+          </div>
+          <div class="col-sm-9">
+            <input
+              id="confirmPassword"
+              type="password"
+              name="confirmPassword"
+              class="form-control"
+              th:value="*{confirmPassword}"
+              th:disabled="*{readOnly == '1'}"
+            />
+            <span
+              class="float-left text-danger"
+              th:if="${#fields.hasErrors('confirmPassword')}"
+              th:errors="*{confirmPassword}"
+            ></span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="float-left m-2" for="sex">性別</label>
+          </div>
+          <div class="col-sm-9">
+            <select
+              name="sex"
+              class="form-control"
+              th:field="*{sex}"
+              th:disabled="*{readOnly == '1'}"
+            >
+              <option th:each="map : ${sexMap}" th:value="${map.key}">[[${map.value}]]</option>
+            </select>
+            <span
+              class="float-left text-danger"
+              th:if="${#fields.hasErrors('sex')}"
+              th:errors="*{sex}"
+            ></span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="float-left m-2" for="birthDay">生年月日</label>
+          </div>
+          <div class="col-sm-9 input-group">
+            <input
+              id="birthDay"
+              type="text"
+              name="birthDay"
+              class="form-control"
+              th:value="*{birthDay}"
+              th:disabled="*{readOnly == '1'}"
+            />
+            <span class="input-group-btn">
+              <button
+                class="btn btn-default"
+                type="button"
+                data-toggle="datepicker"
+                data-target="#birthDay"
+              >
+                <span class="far fa-calendar-alt"></span>
+              </button>
+            </span>
+            <span
+              class="float-left text-danger"
+              th:if="${#fields.hasErrors('birthDay')}"
+              th:errors="*{birthDay}"
+            ></span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="float-left m-2" for="hopeDay">希望日</label>
+          </div>
+          <div class="col-sm-9 input-group">
+            <input
+              id="hopeDay"
+              type="text"
+              name="hopeDay"
+              class="form-control"
+              th:value="*{hopeDay}"
+              th:disabled="*{readOnly == '1'}"
+            />
+            <span class="input-group-btn">
+              <button
+                class="btn btn-default"
+                type="button"
+                data-toggle="datepicker"
+                data-target="#hopeDay"
+              >
+                <span class="far fa-calendar-alt"></span>
+              </button>
+            </span>
+            <span
+              class="float-left text-danger"
+              th:if="${#fields.hasErrors('hopeDay')}"
+              th:errors="*{hopeDay}"
+            ></span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="float-left m-2" for="authority">権限</label>
+          </div>
+          <div class="col-sm-9">
+            <span class="form-inline float-left m-2" th:each="map : ${authorityMap}">
+              <input
+                th:id="authority+${map.key}"
+                type="radio"
+                name="authority"
+                th:value="${map.key}"
+                th:field="*{authority}"
+                th:disabled="*{readOnly == '1'}"
+              />
+              <label th:for="authority+${map.key}">[[${map.value}]]</label>
+            </span>
+            <span
+              class="float-left text-danger"
+              th:if="${#fields.hasErrors('authority')}"
+              th:errors="*{authority}"
+            ></span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="float-left m-2" for="availableFunction">利用可能機能</label>
+          </div>
+          <div class="col-sm-9">
+            <span class="form-inline float-left m-2" th:each="map : ${availableFunctionMap}">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-primary" th:for="availableFunction+${map.key}">
+                  <input
+                    th:id="availableFunction+${map.key}"
+                    type="checkbox"
+                    name="availableFunction"
+                    autocomplete="off"
+                    th:value="${map.key}"
+                    th:checked="${#arrays.contains(userForm.availableFunction, '' + map.key)}"
+                    th:disabled="*{readOnly == '1'}"
+                  />
+                  [[${map.value}]]
+                </label>
+              </div>
+            </span>
+            <span
+              class="float-left text-danger"
+              th:if="${#fields.hasErrors('availableFunction')}"
+              th:errors="*{availableFunction}"
+            ></span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="float-left m-2" for="readOnly">読み取り専用</label>
+          </div>
+          <div class="col-sm-9">
+            <span class="form-inline float-left m-2">
+              <input
+                th:id="readOnly"
+                type="checkbox"
+                name="readOnly"
+                value="1"
+                th:checked="*{readOnly == '1'}"
+              />
+              <label th:for="readOnly"></label>
+            </span>
+            <span
+              class="float-left text-danger"
+              th:if="${#fields.hasErrors('readOnly')}"
+              th:errors="*{readOnly}"
+            ></span>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </body>
 </html>

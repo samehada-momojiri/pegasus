@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    config:
+      url: http://localhost:8888
+    fail-fast: false
+    enabled: false
+    label: configRepo
+  config:
+    name: application
+  application:
+    name: pegasus-front

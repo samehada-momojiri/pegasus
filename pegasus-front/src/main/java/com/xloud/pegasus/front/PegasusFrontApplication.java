@@ -13,7 +13,7 @@ public class PegasusFrontApplication {
 
 	public static void main(String[] args) {
 		Properties properties = System.getProperties();
-		properties.put("spring.config.location", "classpath:application.yml,classpath:/application-override.yml");
+		properties.put("spring.config.location", "classpath:bootstrap.yml,classpath:application.yml,classpath:/application-override.yml");
 		SpringApplication.run(PegasusFrontApplication.class, args);
 	}
 
