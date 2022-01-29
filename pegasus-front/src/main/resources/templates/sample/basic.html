@@ -1,73 +1,76 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/default-layout">
+<!DOCTYPE html>
+<html
+  lang="ja"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="layouts/default-layout"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="'What time'"></title>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<title th:text="'What time'"></title>
-</head>
+  <body>
+    <div layout:fragment="content">
+      <h1>Basic Contents</h1>
 
-<body>
-	<div layout:fragment="content">
-		<h1>Basic Contents</h1>
+      <p>priority</p>
+      <p th:text="${priority}"></p>
 
-		<p>priority</p>
-		<p th:text="${priority}"></p>
+      <th:block th:if="${priority == 3}">
+        <p>th:if ${priority == 3}</p>
+      </th:block>
+      <th:block th:unless="${priority == 3}">
+        <p>th:unless ${priority == 3}</p>
+      </th:block>
 
-		<th:block th:if="${priority == 3}">
-			<p>th:if ${priority == 3}</p>
-		</th:block>
-		<th:block th:unless="${priority == 3}">
-			<p>th:unless ${priority == 3}</p>
-		</th:block>
+      <th:block th:if="${priority >= 2}">
+        <p>th:if ${priority >= 2}</p>
+      </th:block>
 
-		<th:block th:if="${priority >= 2}">
-			<p>th:if ${priority >= 2}</p>
-		</th:block>
+      <th:block th:if="${priority < 2}">
+        <p>th:if ${priority < 2}</p>
+      </th:block>
 
-		<th:block th:if="${priority < 2}">
-			<p>th:if ${priority < 2}</p>
-		</th:block>
+      <th:block th:switch="${priority}">
+        <p th:case="1" th:text="LOW"></p>
+        <p th:case="2" th:text="MIDDLE"></p>
+        <p th:case="3" th:text="HIGH"></p>
+        <p th:case="*" th:text="UNKNOWN"></p>
+      </th:block>
 
-		<th:block th:switch="${priority}">
-			<p th:case=1 th:text="LOW"></p>
-			<p th:case=2 th:text="MIDDLE"></p>
-			<p th:case=3 th:text="HIGH"></p>
-			<p th:case=* th:text="UNKNOWN"></p>
-		</th:block>
+      <p>Data</p>
+      <p th:text="${prefix} + '-' + ${body}"></p>
 
-		<p>Data</p>
-		<p th:text="${prefix} + '-' + ${body}"></p>
+      <p>Str</p>
+      <p th:text="${str}"></p>
+      <p th:text="${#sample.convert(str)}"></p>
+      <p th:text="${#sample.format(str)}"></p>
+      <p th:text="${#strings.abbreviate(longstr, 20)}"></p>
+      <p th:text="${#strings.replace(#strings.abbreviate(longstr, 22), '...', '…')}"></p>
 
-		<p>Str</p>
-		<p th:text="${str}"></p>
-		<p th:text="${#sample.convert(str)}"></p>
-		<p th:text="${#sample.format(str)}"></p>
-		<p th:text="${#strings.abbreviate(longstr, 20)}"></p>
-		<p th:text="${#strings.replace(#strings.abbreviate(longstr, 22), '...', '…')}"></p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>名前</th>
+            <th>チーム</th>
+            <th>生年月日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="player, status : ${playerList}">
+            <th th:text="${status.count}"></th>
+            <td th:text="${player.name}"></td>
+            <td th:text="${player.team}"></td>
+            <td th:text="${#dates.format(player.birthday, 'yyyy-MM-dd')}"></td>
+          </tr>
+        </tbody>
+      </table>
 
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>名前</th>
-					<th>チーム</th>
-					<th>生年月日</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="player, status : ${playerList}">
-					<th th:text="${status.count}"></th>
-					<td th:text="${player.name}"></td>
-					<td th:text="${player.team}"></td>
-					<td th:text="${#dates.format(player.birthday, 'yyyy-MM-dd')}"></td>
-				</tr>
-			</tbody>
-		</table>
-
-		<a th:href="@{/dev/v1.0/mpa/sample/time}">
-			<button type="button" class="btn btn-primary">Go to Time</button>
-		</a>
-	</div>
-</body>
-
+      <a th:href="@{/dev/v1.0/mpa/sample/time}">
+        <button type="button" class="btn btn-primary">Go to Time</button>
+      </a>
+    </div>
+  </body>
 </html>

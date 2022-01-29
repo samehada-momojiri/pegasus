@@ -1,19 +1,21 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/default-layout">
+<html
+  lang="ja"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/default-layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="'What time'"></title>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<title th:text="'What time'"></title>
-</head>
+  <body>
+    <div layout:fragment="content">
+      <h1 th:text="'What time is it?'"></h1>
 
-<body>
-	<div layout:fragment="content">
-		<h1 th:text="'What time is it?'"></h1>
-
-		<div class="border">
-			<p th:text="${dateTime}"></p>
-		</div>
-	</div>
-</body>
-
+      <div class="border">
+        <p th:text="${dateTime}"></p>
+      </div>
+    </div>
+  </body>
 </html>
