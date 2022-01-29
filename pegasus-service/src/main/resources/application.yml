@@ -29,6 +29,81 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      # CircuitBraekerの状態がCLOSEである際の外部呼び出しの数を保存する個数
+      slidingWindowSize: 10
+      # CurcitBraekerがエラーのカウント始めるまでの最低の呼び出し回数
+      # 10が指定された場合、最初の9回がエラーで落ちていたとしてもCircuitBraekerはOPENの状態に遷移しない
+      minimumNumberOfCalls: 2
+      # CirCuitBreakerがHALF_OPENの状態の際に許可される呼び出しの上限
+      permittedNumberOfCallsInHalfOpenState: 3
+      # tureが設定されていた場合、CircuitBraekrはOPENの状態からHALF_OPENの状態に自動的に遷移する
+      automaticTransitionFromOpenToHalfOpenEnabled: false
+      # CircuitBraekerがOPEWからHALF_OPENへ遷移する際の待ち時間
+      waitDurationInOpenState: 5s
+      # 失敗率をパーセンテージで設定する。失敗率が設定値よりも上回った際にCircuitBreakerはCloseからOpenの状態に遷移する
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+      # 失敗回数としてカウントする対象となる例外
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+        - com.xloud.pegasus.common.exception.SystemException
+      # 失敗回数のカウントから除外する例外
+      ignoreExceptions:
+        - com.xloud.pegasus.common.exception.BusinessException
+    shared:
+      # CircuitBraekerの状態がCLOSEである際の外部呼び出しの数を保存する個数
+      slidingWindowSize: 100
+      # CirCuitBreakerがHALF_OPENの状態の際に許可される呼び出しの上限
+      permittedNumberOfCallsInHalfOpenState: 30
+      # CircuitBraekerがOPEWからHALF_OPENへ遷移する際の待ち時間
+      waitDurationInOpenState: 1s
+      # 失敗率をパーセンテージで設定する。失敗率が設定値よりも上回った際にCircuitBreakerはCloseからOpenの状態に遷移する
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+      # 失敗回数のカウントから除外する例外
+      ignoreExceptions:
+        - com.xloud.pegasus.common.exception.BusinessException
+  instances:
+    backendA:
+      baseConfig: default
+    backendB:
+      registerHealthIndicator: true
+      # CircuitBraekerの状態がCLOSEである際の外部呼び出しの数を保存する個数
+      slidingWindowSize: 10
+      # CurcitBraekerがエラーのカウント始めるまでの最低の呼び出し回数
+      # 10が指定された場合、最初の9回がエラーで落ちていたとしてもCircuitBraekerはOPENの状態に遷移しない
+      minimumNumberOfCalls: 4
+      # CirCuitBreakerがHALF_OPENの状態の際に許可される呼び出しの上限
+      permittedNumberOfCallsInHalfOpenState: 3
+      # CircuitBraekerがOPEWからHALF_OPENへ遷移する際の待ち時間
+      waitDurationInOpenState: 5s
+      # 失敗率をパーセンテージで設定する。失敗率が設定値よりも上回った際にCircuitBreakerはCloseからOpenの状態に遷移する
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+      #recordFailurePredicate: io.github.robwin.exception.RecordFailurePredicate
+resilience4j.ratelimiter:
+  configs:
+    default:
+      # 10秒間に2回を超過する呼び出しがあると3秒待機後にRequestNotPermittedをthrowする
+      registerHealthIndicator: false
+      limitForPeriod: 2
+      limitRefreshPeriod: 10s
+      timeoutDuration: 3s
+      eventConsumerBufferSize: 100
+  instances:
+    backendA:
+      baseConfig: default #デフォルト設定で動作する
+    backendB:
+      # 60秒間に3回を超過する呼び出しがあると5秒待機後にRequestNotPermittedをthrowする
+      limitForPeriod: 10
+      limitRefreshPeriod: 60000ms
+      timeoutDuration: 5s
 application:
   version: v1.0
   business:

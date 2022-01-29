@@ -32,6 +32,8 @@ dependencies {
 	implementation 'org.codehaus.janino:janino:3.1.6' // logbackで環境ごとに設定を切り替えるため
     implementation 'ch.qos.logback:logback-core'
     implementation 'ch.qos.logback:logback-classic'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'io.github.resilience4j:resilience4j-spring-boot2:1.7.1'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
