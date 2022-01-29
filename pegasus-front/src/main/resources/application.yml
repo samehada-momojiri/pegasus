@@ -38,15 +38,15 @@ security:
   admin:
     username: admin
     password: pass
-#management:
-#  endpoints:
-#    web:
-#      base-path: /system
-#      exposure:
-#        include: "*"
-#        exclude: shutdown
-#    health:
-#      show-details: always
+
+# https://spring.pleiades.io/spring-boot/docs/current/reference/html/actuator.html
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
+        exclude: shutdown
 
 log:
   base-directory: C:/work/logs
