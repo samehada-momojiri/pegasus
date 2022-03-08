@@ -1,0 +1,25 @@
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/default-layout}">
+
+<head>
+	<meta charset="UTF-8" />
+	<title th:text="'Session Sample'"></title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="border">
+			<form method="POST" th:action="@{/dev/v1.0/mpa/session/send}">
+				<input type="text" name="param">
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+		<div class="border">
+			<form method="GET" th:action="@{/dev/v1.0/mpa/session/nop}">
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -9,8 +9,8 @@ import org.springframework.web.context.annotation.SessionScope;
 
 @Component
 @SessionScope
-public class SessionInfo implements Serializable {
 
+public class SessionInfo implements Serializable {
 	/**
 	 * SerialVersionUID.
 	 */
@@ -18,15 +18,8 @@ public class SessionInfo implements Serializable {
 
 	private String clientIp;
 	private String startedAt;
+	private String lastAccessedAt;
 	private String message;
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
 
 	public String getClientIp() {
 		return clientIp;
@@ -44,8 +37,28 @@ public class SessionInfo implements Serializable {
 		this.startedAt = startedAt;
 	}
 
+	public String getLastAccessedAt() {
+		return lastAccessedAt;
+	}
+
+	public void setLastAccessedAt(String lastAccessedAt) {
+		this.lastAccessedAt = lastAccessedAt;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public void setStartedAt(LocalDateTime startedAt) {
 		this.startedAt = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(startedAt);
+	}
+
+	public void setLastAccessedAt(LocalDateTime lastAccessedAt) {
+		this.lastAccessedAt = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(lastAccessedAt);
 	}
 
 }
