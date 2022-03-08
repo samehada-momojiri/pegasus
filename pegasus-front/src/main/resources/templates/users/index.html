@@ -1,0 +1,27 @@
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/default-layout}">
+
+<head>
+	<meta charset="UTF-8" />
+	<title th:text="'User Sample'"></title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="border">
+			<form method="POST" th:action="@{/dev/v1.0/mpa/users/search}">
+				<input type="text" name="id">
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+		<div class="border">
+			<th:block th:if="${userGetResponse != null}">
+				<p>[[${userGetResponse.userId}]]</p>
+				<p>[[${userGetResponse.userName}]]</p>
+				<p>[[${userGetResponse.mailAddress}]]</p>
+			</th:block>
+		</div>
+	</div>
+</body>
+
+</html>

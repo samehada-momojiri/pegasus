@@ -32,6 +32,12 @@ spring:
       enabled: true
     restart:
       enabled: true
+feign:
+  client:
+    config:
+      UserClient: # @FeignClient name
+        connect-timeout: 1000 # milli seconds
+        read-timeout:    5000 # milli seconds
 application:
   version: v1.0
 security:

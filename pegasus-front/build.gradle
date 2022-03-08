@@ -22,6 +22,12 @@ ext {
 	set('springCloudVersion', "2021.0.0")
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
 dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools' // hot deploy
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
@@ -33,6 +39,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	implementation 'org.apache.commons:commons-lang3'
 	implementation 'com.google.guava:guava:30.1.1-jre'
     implementation 'org.slf4j:slf4j-api'
