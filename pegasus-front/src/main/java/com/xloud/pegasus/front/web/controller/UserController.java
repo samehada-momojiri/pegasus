@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xloud.pegasus.common.web.response.UserGetResponse;
 import com.xloud.pegasus.constants.CommonConstants;
-import com.xloud.pegasus.front.service.feignclient.UserClient;
+import com.xloud.pegasus.front.business.feignclient.UserClient;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

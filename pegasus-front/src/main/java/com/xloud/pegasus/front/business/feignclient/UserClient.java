@@ -1,4 +1,4 @@
-package com.xloud.pegasus.front.service.feignclient;
+package com.xloud.pegasus.front.business.feignclient;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
