@@ -36,7 +36,7 @@ public class DataLinkageBLImpl implements DataLinkageBL {
 
 		ApiResponseBaseDto responseDto = dataMessagingFeignClient.doPublish(dataLinkagePublishRequestDto);
 		if (CommonConstants.API_RESPONSE_ERROR.equals(responseDto.getApiResponseResult())) {
-			throw new BusinessException(responseDto.getErrors(), null);
+			throw new BusinessException(responseDto.getErrors());
 		}
 	}
 
@@ -53,7 +53,7 @@ public class DataLinkageBLImpl implements DataLinkageBL {
 		DataLinkageSubscriptionResponseDto responseDto = dataMessagingFeignClient
 				.doSubscription(dataLinkageSubscriptionRequestDto);
 		if (CommonConstants.API_RESPONSE_ERROR.equals(responseDto.getApiResponseResult())) {
-			throw new BusinessException(responseDto.getErrors(), null);
+			throw new BusinessException(responseDto.getErrors());
 		}
 
 		List<ValueObjectDto> valueObjectDtoList = responseDto.getValueObjectDtoList();
