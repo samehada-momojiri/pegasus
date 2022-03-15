@@ -9,6 +9,7 @@ import com.xloud.pegasus.common.web.request.UserUpdateRequest;
 import com.xloud.pegasus.common.web.response.UserCreateResponse;
 import com.xloud.pegasus.common.web.response.UserGetListResponse;
 import com.xloud.pegasus.common.web.response.UserGetResponse;
+import com.xloud.pegasus.constants.CommonConstants;
 import com.xloud.pegasus.common.web.response.UserGetListResponse.User;
 import com.xloud.pegasus.service.domain.service.dto.UserDto;
 
@@ -20,13 +21,19 @@ public class UsersHelper {
 			ConvertUtils.copyProperties(dto, user);
 			return user;
 		}).collect(Collectors.toList());
+		response.setApiResponseResult(CommonConstants.API_RESPONSE_SUCCESS);
+		response.setHttpStatus(200);
 		response.setUsers(users);
 		return response;
 	}
 
 	public static UserGetResponse convertToUsersGetResponse(UserDto dto) {
 		final UserGetResponse response = new UserGetResponse();
-		ConvertUtils.copyProperties(dto, response);
+		if (dto != null) {
+			ConvertUtils.copyProperties(dto, response);
+		}
+		response.setApiResponseResult(CommonConstants.API_RESPONSE_SUCCESS);
+		response.setHttpStatus(200);
 		return response;
 	}
 
@@ -38,7 +45,11 @@ public class UsersHelper {
 
 	public static UserCreateResponse convertToUsersCreateResponse(UserDto dto) {
 		final UserCreateResponse response = new UserCreateResponse();
-		ConvertUtils.copyProperties(dto, response);
+		if (dto != null) {
+			ConvertUtils.copyProperties(dto, response);
+		}
+		response.setApiResponseResult(CommonConstants.API_RESPONSE_SUCCESS);
+		response.setHttpStatus(200);
 		return response;
 	}
 
