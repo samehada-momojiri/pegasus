@@ -12,6 +12,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class DataLinkageSubscriptionResponseDto extends ApiResponseBaseDto {
 
+	private static final long serialVersionUID = 1L;
+
 	private String nameSpace;
 	private String interfaceName;
 	private String identifier;

@@ -6,10 +6,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.collect.Lists;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserGetListResponse {
+public class UserGetListResponse extends ApiResponseBaseDto {
+
+	private static final long serialVersionUID = 1L;
 
 	private List<User> users = Lists.newArrayList();
 
