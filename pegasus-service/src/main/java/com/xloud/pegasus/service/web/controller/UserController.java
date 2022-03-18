@@ -2,6 +2,8 @@ package com.xloud.pegasus.service.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import com.xloud.pegasus.common.web.request.UserUpdateRequest;
 import com.xloud.pegasus.common.web.response.UserCreateResponse;
 import com.xloud.pegasus.common.web.response.UserGetListResponse;
 import com.xloud.pegasus.common.web.response.UserGetResponse;
+import com.xloud.pegasus.service.common.context.ThreadContext;
 import com.xloud.pegasus.service.domain.service.UserService;
 import com.xloud.pegasus.service.domain.service.dto.UserDto;
 import com.xloud.pegasus.service.web.helper.UsersHelper;
@@ -34,6 +37,8 @@ public class UserController {
 
 	private final UserService userService;
 
+	private final ThreadContext threadContext;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public UserGetListResponse getList() {
 		List<UserDto> resultList = userService.findAll();
@@ -41,8 +46,12 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "{id}")
-	public UserGetResponse get(@PathVariable("id") Long id) {
-		LOGGER.info("#id : {}", id);
+	public UserGetResponse get(@PathVariable("id") Long id, HttpServletRequest request) {
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("#id : {}", id);
+			LOGGER.debug("#SessionId : {}", threadContext.getSessionId());
+			LOGGER.debug("#ThreadDate : {}", threadContext.getThreadDate());
+		}
 		UserDto result = userService.findById(id);
 		return UsersHelper.convertToUsersGetResponse(result);
 	}
